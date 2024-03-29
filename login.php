@@ -28,7 +28,7 @@ if(isset($_POST['username']) && isset($_POST['password']) && !empty($_POST['user
         // echo "<a href='main/index.html'>Login successful></a>";
     } else {
         // User not found or invalid credentials
-        echo "Invalid username or password";
+        echo "Invalid Username or Password";
     }
 
     // Close database connection
