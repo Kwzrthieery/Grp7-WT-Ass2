@@ -37,11 +37,34 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="contact.html">Contact</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="table.html">Tables</a>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" role="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            Tables
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="multimedia.php">user Table</a></li>
+                                            <li><a class="dropdown-item" href="comment.php">Comment Table</a></li>
+                                            <li><a class="dropdown-item" href="friend.php">Friend Table</a></li>
+                                            <li><a class="dropdown-item" href="like.php">Like Table</a></li>
+                                            <li><a class="dropdown-item" href="unlike.php">UnLike Table</a></li>
+                                        </ul>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="form.html">Forms</a>
+                                         <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" role="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            Forms
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="multimedia.html">Multimedia Form</a></li>
+                                            <li><a class="dropdown-item" href="article.html">Article Form</a></li>
+                                            <li><a class="dropdown-item" href="comment.html">Comment Form</a></li>
+                                            <li><a class="dropdown-item" href="friend.html">Friend Form</a></li>
+                                            <li><a class="dropdown-item" href="like.html">Like Form</a></li>
+                                            <li><a class="dropdown-item" href="unlike.html">UnLike Form</a></li>
+                                            <li><a class="dropdown-item" href="role.html">Role Form</a></li>
+                                            <li><a class="dropdown-item" href="profile.html">Profile Form</a></li>
+                                        </ul>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="list.html">List</a>
@@ -71,14 +94,6 @@
                                     <li> 
                                         <div class="col-3 offset">
                                             <div class="well" id="welcomeMessage" action="login.php">
-                                                <?php
-                                                // Check if the full name is set and not empty
-                                                if(isset($fullname) && !empty($fullname)) {
-                                                    echo "Welcome, $fullname";
-                                                } else{
-                                                    echo "no fullname found";
-                                                }
-                                                ?>
                                             </div>
                                         </div>
                                     </li>
