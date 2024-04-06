@@ -1,19 +1,38 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>All In One BIT 2024</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-        </script>
-    <!--<link rel="stylesheet" href="./css/basicstyle.css"> -->
+    </script>
 </head>
-
-<body>
+<body style="background-color: #f0f0f0;">
     <div class="container"><!--check more that can be added on the content-->
         <div class="row">
             <div class="col-auto">
@@ -106,57 +125,58 @@
             </div>
         </div>
     </div>
-    <div class="container">
-        <!--<h1>Contents about the video</h1>-->
-        <div class="row gx-5">
-            <div class="col-8">
-                <!-- Slideshow -->
-                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="./multimedia/images/1.jpeg" class="d-block w-100" alt="Slide 1">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="./multimedia/images/2.jpeg" class="d-block w-100" alt="Slide 2">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="./multimedia/images/3.jpeg" class="d-block w-100" alt="Slide 3">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="./multimedia/images/4.jpeg" class="d-block w-100" alt="Slide 3">
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-            </div>
-            <div class="col col-gy-4 col-g-2">
-                <!-- Image 1 -->
-                <div class="grid gap-0 row-gap-6">
-                    <img src="./multimedia/images/11.jpeg" alt="Additional Image 1" class="img-fluid">
-                    <p><a href="#">Description for Image 1</a></p>
-                </div>
-                <!-- Image 2 -->
-                <div class="grid gap-0 row-gap-6">
-                    <img src="./multimedia/images/22.jpeg" alt="Additional Image 2" class="img-fluid">
-                    <p><a href="#">Description for Image 2</a></p>
-                </div>
-                <!-- Image 3 -->
-                <div class="grid gap-0 row-gap-6">
-                    <img src="./multimedia/images/33.jpeg" alt="Additional Image 3" class="img-fluid">
-                    <p><a href="#">Description for Image 3</a></p>
-                </div>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Firstname</th>
+                            <th>Lastname</th>
+                            <th>Email</th>
+                            <th>Telephone</th>
+                            <th>Creation Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $servername = "localhost";
+                        $username = "admin";
+                        $password = "bityear2@2024";
+                        $dbname = "bityeartwo2024";
+
+                        // Create connection
+                        $conn = new mysqli($servername, $username, $password, $dbname);
+
+                        // Check connection
+                        if ($conn->connect_error) {
+                            die("Connection failed: " . $conn->connect_error);
+                        }
+
+                        $sql = "SELECT firstname, lastname, username, email, telephone, password, creationdate FROM user";
+                        $result = $conn->query($sql);
+
+                        if ($result->num_rows > 0) {
+                            // output data of each row
+                            while($row = $result->fetch_assoc()) {
+                                echo "<tr>
+                                        <td>".$row["firstname"]."</td>
+                                        <td>".$row["lastname"]."</td>
+                                        <td>".$row["email"]."</td>
+                                        <td>".$row["telephone"]."</td>
+                                        <td>".$row["creationdate"]."</td>
+                                      </tr>";
+                            }
+                        } else {
+                            echo "0 results";
+                        }
+                        $conn->close();
+                        ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </body>
-
+   
 </html>
