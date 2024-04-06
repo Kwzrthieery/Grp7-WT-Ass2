@@ -1,3 +1,5 @@
+<!-- Kwizera Thierry -->
+<!-- 222003408 -->
 <?php
 // Check if username and password are set and not empty
 if(isset($_POST['username']) && isset($_POST['password']) && !empty($_POST['username']) && !empty($_POST['password'])) {

@@ -1,3 +1,5 @@
+// Kwizera thierry
+// 222003408
 document.getElementById("loginForm").addEventListener("submit", function(event){
     event.preventDefault();
     

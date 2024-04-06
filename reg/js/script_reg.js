@@ -1,3 +1,5 @@
+// Kwizera Thierry
+// 222003408
 document.getElementById("registrationForm").addEventListener("submit", function(event){
     event.preventDefault();
     

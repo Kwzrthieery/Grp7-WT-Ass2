@@ -1,3 +1,5 @@
+<!-- Kwizera Thierry -->
+<!-- 222003408 -->
 <?php
 // Database connection
 $servername = "localhost";
