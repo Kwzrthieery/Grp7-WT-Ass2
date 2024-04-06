@@ -1,16 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang='en'>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
     <title>All In One BIT 2024</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-        </script>
-    <!--<link rel="stylesheet" href="./css/basicstyle.css"> -->
+    </script>
+    <style>
+        /* Add your custom CSS here */
+        body {
+            background-color: #f0f0f0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        tr:hover {
+            background-color: #ddd;
+        }
+    </style>
 </head>
 
 <body>
@@ -106,40 +130,49 @@
             </div>
         </div>
     </div>
-    <div class="container">
-        <!--<h1>Contents about the video</h1>-->
-        <div class="row gx-5">
-            <div class="col-8">
-                <audio controls>
-                    <source src="./multimedia/audio/audio.mp3"
-                        alt="This is the main audio being displayed in the middle" type="audio/mpeg">
-                    Your browser does not support the audio tag
-                    <caption>This is our main audio</caption>
-                </audio>
-            </div>
-            <div class="col col-gy-4 col-g-2"> <!--col-sm-4 offset-sm-2">-->
-                <div class="grid gap-0 row-gap-6">
-                    <audio controls>
-                        <source src="./multimedia/audio/audio.mp3" type="audio/mpeg">
-                        Your browser does not support the audio tag
-                        <caption>This is our first additional audio</caption>
-                    </audio>
-                    <p><a href="#">This is my best audio ever</a></p>
-                </div>
-                <div class="grid gap-0 row-gap-6">
-                    <audio controls>
-                        <source src="./multimedia/audio/audio.mp3" type="audio/mpeg">
-                        Your browser does not support the audio tag
-                        <caption>This is our second additional audio</caption>
-                    </audio>
-                </div>
-                <div class="grid gap-0 row-gap-6">
-                    <audio controls>
-                        <source src="./multimedia/audio/audio.mp3" type="audio/mpeg">
-                        Your browser does not support the audio tag
-                        <caption>This is our third additional audio</caption>
-                    </audio>
-                </div>
+    <div class='container'>
+        <div class='row'>
+            <div class='col'>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Article Title</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $servername = "localhost";
+                        $username = "admin";
+                        $password = "bityear2@2024";
+                        $dbname = "bityeartwo2024";
+
+                        // Create connection
+                        $conn = new mysqli($servername, $username, $password, $dbname);
+
+                        // Check connection
+                        if ($conn->connect_error) {
+                            die("Connection failed: " . $conn->connect_error);
+                        }
+                        $query = "SELECT like.lid, user.firstname, user.lastname, article.title 
+                                  FROM `like` 
+                                  JOIN user ON like.userid = user.id 
+                                  JOIN article ON like.contentid = article.artid";
+                        $result = $conn->query($query);
+
+                        // Display fetched data in the table
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo "<tr>
+                                    <td>{$row['firstname']} {$row['lastname']}</td>
+                                    <td>{$row['title']}</td>
+                                  </tr>";
+                        }
+
+                        // Close database connection
+                        mysqli_close($conn);
+                        ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

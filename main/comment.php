@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -9,11 +9,37 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-        </script>
-    <!--<link rel="stylesheet" href="./css/basicstyle.css"> -->
+    </script>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f0f0f0;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dcdcdc;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+    </style>
 </head>
 
-<body>
+<body style="background-color: #f0f0f0;">
+    <!-- Setting background image -->
     <div class="container"><!--check more that can be added on the content-->
         <div class="row">
             <div class="col-auto">
@@ -106,43 +132,61 @@
             </div>
         </div>
     </div>
-    <div class="container">
-        <!--<h1>Contents about the video</h1>-->
-        <div class="row gx-5">
-            <div class="col-8">
-                <audio controls>
-                    <source src="./multimedia/audio/audio.mp3"
-                        alt="This is the main audio being displayed in the middle" type="audio/mpeg">
-                    Your browser does not support the audio tag
-                    <caption>This is our main audio</caption>
-                </audio>
-            </div>
-            <div class="col col-gy-4 col-g-2"> <!--col-sm-4 offset-sm-2">-->
-                <div class="grid gap-0 row-gap-6">
-                    <audio controls>
-                        <source src="./multimedia/audio/audio.mp3" type="audio/mpeg">
-                        Your browser does not support the audio tag
-                        <caption>This is our first additional audio</caption>
-                    </audio>
-                    <p><a href="#">This is my best audio ever</a></p>
-                </div>
-                <div class="grid gap-0 row-gap-6">
-                    <audio controls>
-                        <source src="./multimedia/audio/audio.mp3" type="audio/mpeg">
-                        Your browser does not support the audio tag
-                        <caption>This is our second additional audio</caption>
-                    </audio>
-                </div>
-                <div class="grid gap-0 row-gap-6">
-                    <audio controls>
-                        <source src="./multimedia/audio/audio.mp3" type="audio/mpeg">
-                        Your browser does not support the audio tag
-                        <caption>This is our third additional audio</caption>
-                    </audio>
-                </div>
-            </div>
-        </div>
+
+    <div class="container mt-4">
+        <table>
+            <thead>
+                <tr>
+                    <th>Comment ID</th>
+                    <th>Article Title</th>
+                    <th>User Name</th>
+                    <th>Comment Content</th>
+                    <th>Date of Creation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                // Database connection
+                $servername = "localhost";
+                $username = "admin";
+                $password = "bityear2@2024";
+                $dbname = "bityeartwo2024";
+
+                $conn = new mysqli($servername, $username, $password, $dbname);
+
+                // Check connection
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                }
+
+                // SQL query to fetch data
+                $sql = "SELECT comment.cid, article.title, CONCAT(user.firstname, ' ', user.lastname) AS username, article.contents, article.dateofcreation 
+                        FROM comment 
+                        INNER JOIN article ON comment.contentid = article.artid 
+                        INNER JOIN user ON comment.userid = user.id";
+
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    // Output data of each row
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>
+                                <td>" . $row["cid"] . "</td>
+                                <td>" . $row["title"] . "</td>
+                                <td>" . $row["username"] . "</td>
+                                <td>" . $row["contents"] . "</td>
+                                <td>" . $row["dateofcreation"] . "</td>
+                            </tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='5'>No comments found</td></tr>";
+                }
+                $conn->close();
+                ?>
+            </tbody>
+        </table>
     </div>
+
 </body>
 
 </html>

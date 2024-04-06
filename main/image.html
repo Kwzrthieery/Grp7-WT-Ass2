@@ -43,7 +43,7 @@
                                             Tables
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="user.php">user Table</a></li>
+                                            <li><a class="dropdown-item" href="user.php">User Table</a></li>
                                             <li><a class="dropdown-item" href="comment.php">Comment Table</a></li>
                                             <li><a class="dropdown-item" href="friend.php">Friend Table</a></li>
                                             <li><a class="dropdown-item" href="like.php">Like Table</a></li>

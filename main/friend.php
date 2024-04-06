@@ -1,4 +1,28 @@
-<!DOCTYPE html>
+<?php
+// Assuming you have already connected to your database
+// Replace these placeholders with your actual database connection code
+$servername = "localhost";
+$username = "admin";
+$password = "bityear2@2024";
+$dbname = "bityeartwo2024";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = "SELECT f.fid, CONCAT(u1.firstname, ' ', u1.lastname) AS user_name, CONCAT(u2.firstname, ' ', u2.lastname) AS friend_name 
+        FROM friends f
+        INNER JOIN user u1 ON f.userid = u1.id
+        INNER JOIN user u2 ON f.friendid = u2.id";
+
+$result = $conn->query($sql);
+?>
+
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -9,11 +33,37 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-        </script>
-    <!--<link rel="stylesheet" href="./css/basicstyle.css"> -->
+    </script>
+    <style>
+        /* Add your custom CSS styles here */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+    </style>
 </head>
 
-<body>
+<body style="background-color: #f0f0f0;">
     <div class="container"><!--check more that can be added on the content-->
         <div class="row">
             <div class="col-auto">
@@ -106,43 +156,38 @@
             </div>
         </div>
     </div>
+
     <div class="container">
-        <!--<h1>Contents about the video</h1>-->
-        <div class="row gx-5">
-            <div class="col-8">
-                <audio controls>
-                    <source src="./multimedia/audio/audio.mp3"
-                        alt="This is the main audio being displayed in the middle" type="audio/mpeg">
-                    Your browser does not support the audio tag
-                    <caption>This is our main audio</caption>
-                </audio>
-            </div>
-            <div class="col col-gy-4 col-g-2"> <!--col-sm-4 offset-sm-2">-->
-                <div class="grid gap-0 row-gap-6">
-                    <audio controls>
-                        <source src="./multimedia/audio/audio.mp3" type="audio/mpeg">
-                        Your browser does not support the audio tag
-                        <caption>This is our first additional audio</caption>
-                    </audio>
-                    <p><a href="#">This is my best audio ever</a></p>
-                </div>
-                <div class="grid gap-0 row-gap-6">
-                    <audio controls>
-                        <source src="./multimedia/audio/audio.mp3" type="audio/mpeg">
-                        Your browser does not support the audio tag
-                        <caption>This is our second additional audio</caption>
-                    </audio>
-                </div>
-                <div class="grid gap-0 row-gap-6">
-                    <audio controls>
-                        <source src="./multimedia/audio/audio.mp3" type="audio/mpeg">
-                        Your browser does not support the audio tag
-                        <caption>This is our third additional audio</caption>
-                    </audio>
-                </div>
-            </div>
-        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>FID</th>
+                    <th>User</th>
+                    <th>Friend</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td>" . $row["fid"] . "</td>";
+                        echo "<td>" . $row["user_name"] . "</td>";
+                        echo "<td>" . $row["friend_name"] . "</td>";
+                        echo "</tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='3'>No data found</td></tr>";
+                }
+                ?>
+            </tbody>
+        </table>
     </div>
+
 </body>
 
 </html>
+
+<?php
+$conn->close();
+?>

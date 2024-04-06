@@ -62,7 +62,7 @@
                                             Tables
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="user.php">user Table</a></li>
+                                            <li><a class="dropdown-item" href="user.php">User Table</a></li>
                                             <li><a class="dropdown-item" href="comment.php">Comment Table</a></li>
                                             <li><a class="dropdown-item" href="friend.php">Friend Table</a></li>
                                             <li><a class="dropdown-item" href="like.php">Like Table</a></li>
@@ -168,7 +168,7 @@
                                       </tr>";
                             }
                         } else {
-                            echo "0 results";
+                            echo "<tr><td colspan='3'>No data found</td></tr>";
                         }
                         $conn->close();
                         ?>
