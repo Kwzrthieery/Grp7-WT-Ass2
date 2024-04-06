@@ -25,18 +25,27 @@ if(isset($_POST['username']) && isset($_POST['password']) && !empty($_POST['user
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-        header("Location: main/index.html");
-        exit();
-        // echo "<a href='main/index.html'>Login successful></a>";
-    } else {
-        // User not found or invalid credentials
-        echo "Invalid Username or Password";
-    }
+    $sql1 = "SELECT firstname FROM user WHERE username='$username' AND password='$password'";
+    $sql2 = "SELECT lastname FROM user WHERE username='$username' AND password='$password'";
 
-    // Close database connection
-    $conn->close();
+    $firstname_query = $conn->query($sql1);
+    $lastname_query = $conn->query($sql2);
+
+    // Fetch the actual values from the query results
+    $firstname_row = $firstname_query->fetch_assoc();
+    $lastname_row = $lastname_query->fetch_assoc();
+
+    // Extract first name and last name from the fetched rows
+    $firstname = $firstname_row['firstname'];
+    $lastname = $lastname_row['lastname'];
+
+    // Concatenate first name and last name to form the full name
+    $fullname = $firstname . " " . $lastname;
+    header("Location: main/index.php");
+    exit();
+}
 } else {
-    // Username or password not provided
-    echo "Please provide both username and password";
+    // User not found or invalid credentials
+    echo "Invalid Username or Password";
 }
 ?>

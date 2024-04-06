@@ -68,13 +68,19 @@
                                             <li><a class="dropdown-item" href="register.html">Logout</a></li>
                                         </ul>
                                     </li>
-                                    <li> <!--I added this in my style-->
-                                        <!-- <div class="col-3 offset">-->
-                                        <div>
-                                            
+                                    <li> 
+                                        <div class="col-3 offset">
+                                            <div class="well" id="welcomeMessage" action="login.php">
+                                                <?php
+                                                // Check if the full name is set and not empty
+                                                if(isset($fullname) && !empty($fullname)) {
+                                                    echo "Welcome, $fullname";
+                                                } else{
+                                                    echo "no fullname found";
+                                                }
+                                                ?>
+                                            </div>
                                         </div>
-                                        <!--</div>-->
-
                                     </li>
 
                                 </ul>
@@ -85,29 +91,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Main content 
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col">
-                <h1>Welcome to All In One BIT 2024</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec magna vestibulum, bibendum eros
-                    at, vestibulum nisi. Phasellus vehicula justo a tellus vulputate condimentum. Donec viverra
-                    molestie nisi at malesuada. Vivamus aliquet ultricies ante ac volutpat. Ut ac nunc eu dolor
-                    volutpat bibendum. Morbi at lacus ac est ullamcorper semper. Nulla quis ex et nisl fermentum
-                    tincidunt vitae ut lorem.</p>
-                <p>Maecenas pulvinar nisl in justo tempus, ut hendrerit ipsum blandit. Ut tincidunt ligula sit amet
-                    vehicula consequat. Aliquam erat volutpat. Nullam accumsan orci id turpis suscipit, eu
-                    sollicitudin neque condimentum. Mauris semper vel quam eu molestie. Nunc venenatis tortor in
-                    quam pellentesque, nec dictum neque elementum.</p>
-                <p>Integer bibendum dapibus libero, eu tristique justo ultricies in. Integer non turpis nec arcu
-                    sagittis lacinia. Duis id diam consectetur, gravida nisi nec, consectetur libero. Donec in
-                    bibendum eros. Morbi condimentum, dolor a posuere posuere, purus ligula commodo tellus, at
-                    finibus nunc justo eu eros. Nam vehicula metus sit amet dolor volutpat aliquet.</p>
-            </div>
-        </div>
-    </div> -->
-    <!-- Flash Card -->
     <div class="container mt-4">
         <div class="row">
             <div class="col-md-4"> <!-- Each column takes up 4 units on medium-sized screens and above -->
