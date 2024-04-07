@@ -1,6 +1,36 @@
 <?php
 session_start(); // Start the session
-$userID = $_GET['userID'];
+
+// Check if the user is logged in and their userID is set
+if(isset($_SESSION['username'])) {
+    $username = $_SESSION['username'];
+    $servername = "localhost";
+    $db_username = "admin";
+    $db_password = "bityear2@2024";
+    $dbname = "bityeartwo2024";
+
+    $conn = new mysqli($servername, $db_username, $db_password, $dbname);
+
+    $sql = "SELECT id FROM user WHERE username = '$username'";
+    $result = $conn->query($sql);
+
+    // Check if the query was successful
+    if ($result && mysqli_num_rows($result) > 0) {
+        // Fetch the user ID
+        $row = mysqli_fetch_assoc($result);
+        $userID = $row['id'];
+    } else {
+        // Handle the case where the user ID couldn't be retrieved
+        // You can redirect the user to an error page or display a message
+        echo "Error: Unable to fetch user ID.";
+        exit(); // Stop further execution
+    }
+} else {
+    // Handle the case where the user is not logged in
+    // You can redirect the user to the login page or display a message
+    header("Location: login.php");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -152,9 +182,15 @@ $userID = $_GET['userID'];
             <div class="form">
                 <h1>Profile Form</h1>
                 <form action="process_form.php" method="post"> <!-- Pointing to the PHP script -->
+                    <div class="form-row">
                     <div>
                         <label for="userid" class="form-label">User ID</label>
                         <input type="text" class="form-control" id="userid" name="userid" placeholder="Enter your user ID" value="<?php echo htmlspecialchars($userID); ?>" readonly>
+                    </div>
+                        <div>
+                            <label for="school" class="form-label">School</label>
+                            <input type="text" class="form-control" id="school" name="school" placeholder="Enter school name">
+                        </div>
                     </div>
                     <div class="form-row">
                         <div>

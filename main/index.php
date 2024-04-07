@@ -132,7 +132,7 @@ session_start(); // Start the session
                                                 // Fetch the user ID
                                                  $row = mysqli_fetch_assoc($result);
                                                  $userID = $row['id'];
-                                                 echo "<span class='nav-link'>Hello $username ID: $userID</span>";
+                                                 echo "<span class='nav-link'>Hello $username</span>";
                                             } else {
                                             // Handle the case where the user ID couldn't be retrieved
                                             // You can redirect the user to an error page or display a message
