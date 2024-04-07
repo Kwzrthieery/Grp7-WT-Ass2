@@ -1,21 +1,32 @@
-<!-- Kwizera Thierry_222003408 -->
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All In One BIT 2024</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-        </script>
-    <!--<link rel="stylesheet" href="./css/basicstyle.css"> -->
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-color: #f0f0f0;
+        }
+        .card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 20px; /* Increase the border-radius for more rounded corners */
+            cursor: pointer; /* Change cursor on hover */
+        }
+        .card:hover {
+            transform: scale(1.1); /* Increase size on hover */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Increase shadow on hover */
+        }
+    </style>
 </head>
-<body style="background-color: #f0f0f0;">
-    <!-- Setting background image -->
-    <div class="container"><!--check more that can be added on the content-->
+<body>
+    
+<div class="container"><!--check more that can be added on the content-->
         <div class="row">
             <div class="col-auto">
                 <div class="box">
@@ -30,7 +41,7 @@
                             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                                 <ul class="navbar-nav">
                                     <li class="nav-item">
-                                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                                        <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="about.html">About</a>
@@ -108,10 +119,10 @@
         </div>
     </div>
     <div class="container mt-4">
-        <div class="row">
-            <div class="col-md-4"> <!-- Each column takes up 4 units on medium-sized screens and above -->
-                <div class="card mb-3">
-                    <div class="card-body">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="card mb-4 bg-white rounded">
+                    <div class="card-body text-center">
                         <h5 class="card-title">Flash Card 1</h5>
                         <p class="card-text">This is a sample flash card. You can add any content here.</p>
                         <a href="#" class="btn btn-primary">Learn More</a>
@@ -119,8 +130,8 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card mb-3">
-                    <div class="card-body">
+                <div class="card mb-4 bg-white rounded">
+                    <div class="card-body text-center">
                         <h5 class="card-title">Flash Card 2</h5>
                         <p class="card-text">This is a sample flash card. You can add any content here.</p>
                         <a href="#" class="btn btn-primary">Learn More</a>
@@ -128,8 +139,8 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card mb-3">
-                    <div class="card-body">
+                <div class="card mb-4 bg-white rounded">
+                    <div class="card-body text-center">
                         <h5 class="card-title">Flash Card 3</h5>
                         <p class="card-text">This is a sample flash card. You can add any content here.</p>
                         <a href="#" class="btn btn-primary">Learn More</a>
@@ -137,29 +148,11 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row justify-content-center">
             <div class="col-md-4">
-                <div class="card mb-3">
-                    <div class="card-body">
+                <div class="card mb-4 bg-white rounded">
+                    <div class="card-body text-center">
                         <h5 class="card-title">Flash Card 4</h5>
-                        <p class="card-text">This is a sample flash card. You can add any content here.</p>
-                        <a href="#" class="btn btn-primary">Learn More</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Flash Card 5</h5>
-                        <p class="card-text">This is a sample flash card. You can add any content here.</p>
-                        <a href="#" class="btn btn-primary">Learn More</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Flash Card 6</h5>
                         <p class="card-text">This is a sample flash card. You can add any content here.</p>
                         <a href="#" class="btn btn-primary">Learn More</a>
                     </div>
@@ -168,6 +161,8 @@
         </div>
     </div>
 
+    <script>
+        // JavaScript for making the cards more interactive can be added here
+    </script>
 </body>
-   
 </html>
