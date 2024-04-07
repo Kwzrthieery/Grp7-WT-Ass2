@@ -8,9 +8,6 @@
     <title>All In One BIT 2024</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
     <style>
         body {
             background-color: #f0f0f0;
@@ -101,6 +98,7 @@
                                             Settings
                                         </a>
                                         <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#" id="profilebtn">Profile</a></li>
                                             <li><a class="dropdown-item" href="#" id="logoutBtn">Logout</a></li>
                                         </ul>
                                     </li>
@@ -193,7 +191,7 @@
                     You have been logged out successfully.
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                    <a href="home.html" class="btn btn-primary">OK</a>
                 </div>
             </div>
         </div>
@@ -205,11 +203,15 @@
         });
 
         document.getElementById('confirmLogoutBtn').addEventListener('click', function() {
-            // Perform logout operations here (e.g., redirect to homepage)
-            // For demonstration purposes, showing logout success modal
             $('#logoutModal').modal('hide');
-            $('#logoutSuccessModal').modal('show');
+            setTimeout(function() {
+                window.location.href = '../index.html';
+            }, 1000);
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
 </body>
 </html>
