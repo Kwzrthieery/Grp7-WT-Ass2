@@ -1,3 +1,5 @@
+<!-- Kwizera thierry -->
+<!-- 222003408 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -99,8 +101,7 @@
                                             Settings
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="login.html">Profile</a></li>
-                                            <li><a class="dropdown-item" href="register.html">Logout</a></li>
+                                            <li><a class="dropdown-item" href="#" id="logoutBtn">Logout</a></li>
                                         </ul>
                                     </li>
                                     <li> 
@@ -161,8 +162,54 @@
         </div>
     </div>
 
+    <!-- Logout Confirmation Modal -->
+    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="logoutModalLabel">Logout Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to logout?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="confirmLogoutBtn">Logout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logout Success Modal -->
+    <div class="modal fade" id="logoutSuccessModal" tabindex="-1" aria-labelledby="logoutSuccessModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="logoutSuccessModalLabel">Logout Success</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    You have been logged out successfully.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // JavaScript for making the cards more interactive can be added here
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            $('#logoutModal').modal('show');
+        });
+
+        document.getElementById('confirmLogoutBtn').addEventListener('click', function() {
+            // Perform logout operations here (e.g., redirect to homepage)
+            // For demonstration purposes, showing logout success modal
+            $('#logoutModal').modal('hide');
+            $('#logoutSuccessModal').modal('show');
+        });
     </script>
 </body>
 </html>
