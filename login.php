@@ -31,13 +31,13 @@ if(isset($_POST['username']) && isset($_POST['password']) && !empty($_POST['user
         $user_row = $result->fetch_assoc();
 
         // Extract first name and last name from the fetched row
-        $fullname = $user_row['firstname'] . " " . $user_row['lastname'];
+        $username = $user_row['username'];
 
         // Store the full name in session for later use
-        $_SESSION['fullname'] = $fullname;
+        $_SESSION['username'] = $username;
 
         // Redirect to main/index.php with welcome message
-        header("Location: main/index.php?welcome=" . urlencode("Welcome, $fullname!"));
+        header("Location: main/index.php?welcome=" . urlencode("Welcome, $username"));
         exit();
     } else {
         // User not found or invalid credentials

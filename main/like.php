@@ -79,7 +79,7 @@
                                         </a>
                                         <ul class="dropdown-menu">
                                             <li><a class="dropdown-item" href="friend.html">Friend Form</a></li>
-                                            <li><a class="dropdown-item" href="profile.html">Profile Form</a></li>
+                                            <li><a class="dropdown-item" href="profile.php">Profile Form</a></li>
                                         </ul>
                                     </li>
                                     <li class="nav-item">

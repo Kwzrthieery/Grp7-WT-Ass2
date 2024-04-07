@@ -85,7 +85,7 @@ session_start(); // Start the session
                                         </a>
                                         <ul class="dropdown-menu">
                                             <li><a class="dropdown-item" href="friend.html">Friend Form</a></li>
-                                            <li><a class="dropdown-item" href="profile.html">Profile Form</a></li>
+                                            <li><a class="dropdown-item" href="profile.php">Profile Form</a></li>
                                         </ul>
                                     </li>
                                     <li class="nav-item">
@@ -115,9 +115,30 @@ session_start(); // Start the session
                                     </li>
                                     <li class="nav-item" style="margin-left: 40px; font-style: bold;">
                                         <?php
-                                        if(isset($_SESSION['fullname'])) {
-                                            $fullname = $_SESSION['fullname'];
-                                            echo "<span class='nav-link'>Hello $fullname!</span>";
+                                        if(isset($_SESSION['username'])) {
+                                            $username = $_SESSION['username'];
+                                            $servername = "localhost";
+                                            $db_username = "admin";
+                                            $db_password = "bityear2@2024";
+                                            $dbname = "bityeartwo2024";
+
+                                            $conn = new mysqli($servername, $db_username, $db_password, $dbname);
+
+                                            $sql = "SELECT id FROM user WHERE username = '$username'";
+                                            $result = $conn->query($sql);
+
+                                            // Check if the query was successful
+                                            if ($result && mysqli_num_rows($result) > 0) {
+                                                // Fetch the user ID
+                                                 $row = mysqli_fetch_assoc($result);
+                                                 $userID = $row['id'];
+                                                 echo "<span class='nav-link'>Hello $username ID: $userID</span>";
+                                            } else {
+                                            // Handle the case where the user ID couldn't be retrieved
+                                            // You can redirect the user to an error page or display a message
+                                            echo "Error: Unable to fetch user ID.";
+                                             exit(); // Stop further execution
+                                         }
                                         }
                                         ?>
                                     </li>
