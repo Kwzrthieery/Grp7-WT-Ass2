@@ -1,6 +1,8 @@
-<!-- Kwizera Thierry -->
+<!-- kwizera thierry -->
 <!-- 222003408 -->
 <?php
+session_start(); // Start the session
+
 // Check if username and password are set and not empty
 if(isset($_POST['username']) && isset($_POST['password']) && !empty($_POST['username']) && !empty($_POST['password'])) {
     // Sanitize user input to prevent SQL Injection
@@ -25,27 +27,24 @@ if(isset($_POST['username']) && isset($_POST['password']) && !empty($_POST['user
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-    $sql1 = "SELECT firstname FROM user WHERE username='$username' AND password='$password'";
-    $sql2 = "SELECT lastname FROM user WHERE username='$username' AND password='$password'";
+        // Fetch the user row
+        $user_row = $result->fetch_assoc();
 
-    $firstname_query = $conn->query($sql1);
-    $lastname_query = $conn->query($sql2);
+        // Extract first name and last name from the fetched row
+        $fullname = $user_row['firstname'] . " " . $user_row['lastname'];
 
-    // Fetch the actual values from the query results
-    $firstname_row = $firstname_query->fetch_assoc();
-    $lastname_row = $lastname_query->fetch_assoc();
+        // Store the full name in session for later use
+        $_SESSION['fullname'] = $fullname;
 
-    // Extract first name and last name from the fetched rows
-    $firstname = $firstname_row['firstname'];
-    $lastname = $lastname_row['lastname'];
-
-    // Concatenate first name and last name to form the full name
-    $fullname = $firstname . " " . $lastname;
-    header("Location: main/index.php");
-    exit();
-}
+        // Redirect to main/index.php with welcome message
+        header("Location: main/index.php?welcome=" . urlencode("Welcome, $fullname!"));
+        exit();
+    } else {
+        // User not found or invalid credentials
+        echo "Invalid Username or Password";
+    }
 } else {
-    // User not found or invalid credentials
-    echo "Invalid Username or Password";
+    // Username or password not provided
+    echo "Please provide both username and password";
 }
 ?>

@@ -73,13 +73,7 @@
                                             Forms
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="multimedia.html">Multimedia Form</a></li>
-                                            <li><a class="dropdown-item" href="article.html">Article Form</a></li>
-                                            <li><a class="dropdown-item" href="comment.html">Comment Form</a></li>
                                             <li><a class="dropdown-item" href="friend.html">Friend Form</a></li>
-                                            <li><a class="dropdown-item" href="like.html">Like Form</a></li>
-                                            <li><a class="dropdown-item" href="unlike.html">UnLike Form</a></li>
-                                            <li><a class="dropdown-item" href="role.html">Role Form</a></li>
                                             <li><a class="dropdown-item" href="profile.html">Profile Form</a></li>
                                         </ul>
                                     </li>
