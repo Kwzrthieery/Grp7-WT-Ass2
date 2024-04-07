@@ -138,8 +138,8 @@ $result = $conn->query($sql);
                                             Settings
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="login.html">Profile</a></li>
-                                            <li><a class="dropdown-item" href="register.html">Logout</a></li>
+                                            <li><a class="dropdown-item" href="#" id="profilebtn">Profile</a></li>
+                                            <li><a class="dropdown-item" href="#" id="logoutBtn">Logout</a></li>
                                         </ul>
                                     </li>
                                     <li> 
@@ -184,6 +184,19 @@ $result = $conn->query($sql);
             </tbody>
         </table>
     </div>
+    <script>
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            $('#logoutModal').modal('show');
+        });
+
+        document.getElementById('confirmLogoutBtn').addEventListener('click', function() {
+            $('#logoutModal').modal('hide');
+            setTimeout(function() {
+                window.location.href = '../index.html';
+            }, 1000);
+        });
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </body>
 
