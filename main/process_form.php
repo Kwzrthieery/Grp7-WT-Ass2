@@ -1,3 +1,5 @@
+<!-- Kwizera thierry -->
+<!-- 222003408 -->
 <?php
 session_start(); // Start the session
 
@@ -28,8 +30,8 @@ if(isset($_SESSION['username'])) {
     $regnumber = $_POST['regnumber'];
 
     // Prepare and bind SQL statement
-    $stmt = $conn->prepare("INSERT INTO profile (userid, Campus, College, Department, Level, `Group`,School, Regnumber) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("isssiss", $userID, $campus, $college, $department, $level, $group, $regnumber);
+    $stmt = $conn->prepare("INSERT INTO profile (userid, Campus, College, Department, Level, `Group`, School, Regnumber) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("isssssss", $userID, $campus, $college, $department, $level, $group, $school, $regnumber);
 
     // Execute SQL statement
     if ($stmt->execute() === TRUE) {

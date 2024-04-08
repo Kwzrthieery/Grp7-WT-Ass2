@@ -1,4 +1,37 @@
+<?php
+session_start(); // Start the session
 
+// Check if the user is logged in and their userID is set
+if(isset($_SESSION['username'])) {
+    $username = $_SESSION['username'];
+    $servername = "localhost";
+    $db_username = "admin";
+    $db_password = "bityear2@2024";
+    $dbname = "bityeartwo2024";
+
+    $conn = new mysqli($servername, $db_username, $db_password, $dbname);
+
+    $sql = "SELECT id FROM user WHERE username = '$username'";
+    $result = $conn->query($sql);
+
+    // Check if the query was successful
+    if ($result && mysqli_num_rows($result) > 0) {
+        // Fetch the user ID
+        $row = mysqli_fetch_assoc($result);
+        $userID = $row['id'];
+    } else {
+        // Handle the case where the user ID couldn't be retrieved
+        // You can redirect the user to an error page or display a message
+        echo "Error: Unable to fetch user ID.";
+        exit(); // Stop further execution
+    }
+} else {
+    // Handle the case where the user is not logged in
+    // You can redirect the user to the login page or display a message
+    header("Location: login.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,16 +43,37 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!--<link rel="stylesheet" href="./css/basicstyle.css"> -->
 
-        <style>
+    <style>
         .navbar {
             background-color: white !important;
+        }
+
+        .form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 90vh;
+        }
+
+        .form {
+            max-width: 400px;
+            padding: 20px;
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-title {
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 20px;
         }
 
     </style>
 </head>
 
 <body style="background-color: white;">
-<div class="container"><!--check more that can be added on the content-->
+        <div class="container"><!--check more that can be added on the content-->
         <div class="row">
             <div class="col-auto">
                 <div class="box">
@@ -61,7 +115,7 @@
                                             Forms
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="friend.html">Friend Form</a></li>
+                                            <li><a class="dropdown-item" href="friends.php">Friend Form</a></li>
                                             <li><a class="dropdown-item" href="profile.php">Profile Form</a></li>
                                         </ul>
                                     </li>
@@ -86,7 +140,7 @@
                                             Settings
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#" id="profilebtn">Profile</a></li>
+                                            <li><a class="dropdown-item" href="set-profile.php" id="profilebtn">Profile</a></li>
                                             <li><a class="dropdown-item" href="#" id="logoutBtn">Logout</a></li>
                                         </ul>
                                     </li>
@@ -105,55 +159,54 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="logoutModalLabel">Logout Confirmation</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="form-container">
+        <div class="form">
+            <h1 class="form-title">Make a Friend</h1>
+            <form action="add_friend.php" method="post">
+                <div class="mb-3">
+                    <label for="userid" class="form-label">User ID</label>
+                    <input type="text" class="form-control" id="userid" name="userid" placeholder="Enter your user ID" value="<?php echo htmlspecialchars($userID); ?>" readonly>
                 </div>
-                <div class="modal-body">
-                    Are you sure you want to logout?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" id="confirmLogoutBtn">Logout</button>
-                </div>
-            </div>
-        </div>
-    </div>
+                <div class="mb-3">
+                    <label for="friendId" class="form-label">Select a Friend</label>
+                    <select class="form-select" id="friendId" name="friendId">
+                        <?php
+                        // Database connection
+                        $servername = "localhost";
+                        $db_username = "admin";
+                        $db_password = "bityear2@2024";
+                        $dbname = "bityeartwo2024";
 
-    <!-- Logout Success Modal -->
-    <div class="modal fade" id="logoutSuccessModal" tabindex="-1" aria-labelledby="logoutSuccessModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="logoutSuccessModalLabel">Logout Success</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        $conn = new mysqli($servername, $db_username, $db_password, $dbname);
+
+                        // Check connection
+                        if ($conn->connect_error) {
+                            die("Connection failed: " . $conn->connect_error);
+                        }
+
+                        // Fetch users from the database
+                        $sql = "SELECT id, firstname, lastname FROM user";
+                        $result = $conn->query($sql);
+
+                        // Populate dropdown with user data
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                $fullName = $row['firstname'] . ' ' . $row['lastname'];
+                                echo "<option value='" . $row['id'] . "'>$fullName</option>";
+                            }
+                        } else {
+                            echo "<option value=''>No users found</option>";
+                        }
+                        ?>
+                    </select>
                 </div>
-                <div class="modal-body">
-                    You have been logged out successfully.
-                </div>
-            </div>
+                <button type="submit" class="btn btn-primary" style="margin-left: 70px;">Add</button>
+            </form>
         </div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('logoutBtn').addEventListener('click', function() {
-                $('#logoutModal').modal('show');
-            });
-
-            document.getElementById('confirmLogoutBtn').addEventListener('click', function() {
-                $('#logoutModal').modal('hide');
-                $('#logoutSuccessModal').modal('show');
-                setTimeout(function() {
-                    window.location.href = '../index.html';
-                }, 2000);
-            });
-        });
-    </script>
 </body>
+
 </html>

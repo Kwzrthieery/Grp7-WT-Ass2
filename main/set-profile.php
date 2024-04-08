@@ -1,43 +1,119 @@
-<!-- Shema christian_222005490 -->
-<!doctype html>
+<?php
+session_start(); // Start the session
+
+// Check if the user is logged in and their userID is set
+if(isset($_SESSION['username'])) {
+    $username = $_SESSION['username'];
+    $servername = "localhost";
+    $db_username = "admin";
+    $db_password = "bityear2@2024";
+    $dbname = "bityeartwo2024";
+
+    $conn = new mysqli($servername, $db_username, $db_password, $dbname);
+
+    $sql = "SELECT id FROM user WHERE username = '$username'";
+    $result = $conn->query($sql);
+
+    // Check if the query was successful
+    if ($result && mysqli_num_rows($result) > 0) {
+        // Fetch the user ID
+        $row = mysqli_fetch_assoc($result);
+        $userID = $row['id'];
+    } else {
+        // Handle the case where the user ID couldn't be retrieved
+        // You can redirect the user to an error page or display a message
+        echo "Error: Unable to fetch user ID.";
+        exit(); // Stop further execution
+    }
+} else {
+    // Handle the case where the user is not logged in
+    // You can redirect the user to the login page or display a message
+    header("Location: login.php");
+    exit();
+}
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve form data
+    $campus = $_POST['campus'];
+    $college = $_POST['college'];
+    $school = $_POST['school'];
+    $department = $_POST['department'];
+    $level = $_POST['level'];
+    $group = $_POST['group'];
+    $regnumber = $_POST['regnumber'];
+
+    // Check if any of the form fields are empty
+    if (empty($campus) || empty($college) || empty($school) || empty($department) || empty($level) || empty($group) || empty($regnumber)) {
+        echo "Please fill in all fields.";
+    } else {
+        // Prepare update statement
+        $sql = "UPDATE profile SET Campus=?, College=?, School=?, Department=?, Level=?, Group=?, Regnumber=? WHERE userid=?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sssssssi", $campus, $college, $school, $department, $level, $group, $regnumber, $userID);
+
+        // Execute the statement
+        if ($stmt->execute()) {
+            echo "Profile updated successfully.";
+        } else {
+            echo "Error updating profile: " . $conn->error;
+        }
+    }
+}
+?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Table-Comments</title>
+    <title>Settings-profile</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="./css/basicstyle.css"> -->
+
     <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        .navbar {
+            background-color: white !important;
         }
 
-        table,
-        th,
-        td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: left;
+        .form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 90vh;
         }
 
-        th {
-            background-color: #f0f0f0;
+        .form {
+            max-width: 800px; /* Adjust the maximum width */
+            padding: 20px;
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        tr:nth-child(even) {
-            background-color: #dcdcdc;
+        .form-title {
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 20px;
         }
 
-        tr:nth-child(odd) {
-            background-color: #ffffff;
+        .form-label {
+            width: 150px; /* Fixed width for labels */
         }
+
+        .form-control {
+            width: calc(100% - 160px); /* Adjust width of form controls */
+            display: inline-block;
+        }
+
+        .form-group {
+            display: inline-block;
+            margin-right: 20px; /* Spacing between form elements */
+        }
+
     </style>
 </head>
 
-<body style="background-color: #f0f0f0;">
-    <!-- Setting background image -->
+<body>
     <div class="container"><!--check more that can be added on the content-->
         <div class="row">
             <div class="col-auto">
@@ -80,7 +156,7 @@
                                             Forms
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="friends.php">Friend Form</a></li>
+                                            <li><a class="dropdown-item" href="friends.html">Friend Form</a></li>
                                             <li><a class="dropdown-item" href="profile.php">Profile Form</a></li>
                                         </ul>
                                     </li>
@@ -124,111 +200,80 @@
             </div>
         </div>
     </div>
-
-    <div class="container mt-4">
-        <table>
-            <thead>
-                <tr>
-                    <th>Comment ID</th>
-                    <th>Article Title</th>
-                    <th>User Name</th>
-                    <th>Comment Content</th>
-                    <th>Date of Creation</th>
-                </tr>
-            </thead>
-            <tbody>
+    <div class="form-container">
+        <div class="form">
+            <h1 class="form-title">Profile</h1>
+            <form action="save_profile.php" method="post">
                 <?php
                 // Database connection
                 $servername = "localhost";
-                $username = "admin";
-                $password = "bityear2@2024";
+                $db_username = "admin";
+                $db_password = "bityear2@2024";
                 $dbname = "bityeartwo2024";
 
-                $conn = new mysqli($servername, $username, $password, $dbname);
+                $conn = new mysqli($servername, $db_username, $db_password, $dbname);
 
                 // Check connection
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);
                 }
 
-                // SQL query to fetch data
-                $sql = "SELECT comment.cid, article.title, CONCAT(user.firstname, ' ', user.lastname) AS username, article.contents, article.dateofcreation 
-                        FROM comment 
-                        INNER JOIN article ON comment.contentid = article.artid 
-                        INNER JOIN user ON comment.userid = user.id";
-
-                $result = $conn->query($sql);
+                // Fetch data from the profile table
+                $sql = "SELECT * FROM profile WHERE userid = ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("i", $userID);
+                $stmt->execute();
+                $result = $stmt->get_result();
 
                 if ($result->num_rows > 0) {
                     // Output data of each row
                     while ($row = $result->fetch_assoc()) {
-                        echo "<tr>
-                                <td>" . $row["cid"] . "</td>
-                                <td>" . $row["title"] . "</td>
-                                <td>" . $row["username"] . "</td>
-                                <td>" . $row["contents"] . "</td>
-                                <td>" . $row["dateofcreation"] . "</td>
-                            </tr>";
+                ?>
+                        <div class="form-group">
+                            <label for="campus" class="form-label">Campus</label>
+                            <input type="text" class="form-control" id="campus" name="campus" value="<?php echo $row['Campus']; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="college" class="form-label">College</label>
+                            <input type="text" class="form-control" id="college" name="college" value="<?php echo $row['College']; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="school" class="form-label">School</label>
+                            <input type="text" class="form-control" id="school" name="school" value="<?php echo $row['School']; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="department" class="form-label">Department</label>
+                            <input type="text" class="form-control" id="department" name="department" value="<?php echo $row['Department']; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="level" class="form-label">Level</label>
+                            <input type="text" class="form-control" id="level" name="level" value="<?php echo $row['Level']; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="group" class="form-label">Group</label>
+                            <input type="text" class="form-control" id="group" name="group" value="<?php echo $row['Group']; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="regnumber" class="form-label">Registration Number</label>
+                            <input type="text" class="form-control" id="regnumber" name="regnumber" value="<?php echo $row['Regnumber']; ?>">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                <?php
                     }
                 } else {
-                    echo "<tr><td colspan='5'>No comments found</td></tr>";
+                    // Show popup to complete profile
+                    echo '<div class="popup"><button type="submit" class="btn btn-primary">Complete your profile</button></div>';
+                    // Redirect to profile.php when the popup is clicked
+                    echo '<script>document.querySelector(".popup").addEventListener("click", function() { window.location.href = "profile.php"; });</script>';
                 }
                 $conn->close();
                 ?>
-            </tbody>
-        </table>
-    </div>
-    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="logoutModalLabel">Logout Confirmation</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Are you sure you want to logout?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" id="confirmLogoutBtn">Logout</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Logout Success Modal -->
-    <div class="modal fade" id="logoutSuccessModal" tabindex="-1" aria-labelledby="logoutSuccessModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="logoutSuccessModalLabel">Logout Success</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    You have been logged out successfully.
-                </div>
-            </div>
+            </form>
         </div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('logoutBtn').addEventListener('click', function() {
-                $('#logoutModal').modal('show');
-            });
-
-            document.getElementById('confirmLogoutBtn').addEventListener('click', function() {
-                $('#logoutModal').modal('hide');
-                $('#logoutSuccessModal').modal('show');
-                setTimeout(function() {
-                    window.location.href = '../index.html';
-                }, 2000);
-            });
-        });
-    </script>
-
 </body>
 
 </html>

@@ -104,7 +104,7 @@ $result = $conn->query($sql);
                                             Forms
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="friend.html">Friend Form</a></li>
+                                            <li><a class="dropdown-item" href="friends.php">Friend Form</a></li>
                                             <li><a class="dropdown-item" href="profile.php">Profile Form</a></li>
                                         </ul>
                                     </li>
@@ -129,7 +129,7 @@ $result = $conn->query($sql);
                                             Settings
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#" id="profilebtn">Profile</a></li>
+                                            <li><a class="dropdown-item" href="set-profile.php" id="profilebtn">Profile</a></li>
                                             <li><a class="dropdown-item" href="#" id="logoutBtn">Logout</a></li>
                                         </ul>
                                     </li>
