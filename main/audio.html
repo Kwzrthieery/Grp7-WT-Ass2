@@ -1,3 +1,4 @@
+<!--Nsengiyumva Edouard,222001639-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -97,25 +98,34 @@
             </div>
         </div>
     </div>
+       <!-- Upload Button -->
+    <div class="container mt-4">
+        <label for="uploadAudio" class="form-label">Upload Audio</label>
+        <input type="file" class="form-control visually-hidden" id="uploadAudio" accept="audio/*"
+            onchange="uploadAudio(event)">
+        <button class="btn btn-primary" onclick="document.getElementById('uploadAudio').click()">
+            <i class="fas fa-file-audio"></i> Upload Audio
+        </button>
+    </div>
+
     <div class="container">
-        <!--<h1>Contents about the video</h1>-->
         <div class="row gx-5">
             <div class="col-8">
-                <audio controls>
-                    <source src="./multimedia/audio/audio.mp3"
-                        alt="This is the main audio being displayed in the middle" type="audio/mpeg">
+                <audio id="mainAudio" controls>
+                    <source src="./multimedia/audio/audio.mp3" alt="This is the main audio being displayed in the middle"
+                        type="audio/mpeg">
                     Your browser does not support the audio tag
                     <caption>This is our main audio</caption>
                 </audio>
             </div>
-            <div class="col col-gy-4 col-g-2"> <!--col-sm-4 offset-sm-2">-->
+            <div class="col col-gy-4 col-g-2">
                 <div class="grid gap-0 row-gap-6">
                     <audio controls>
                         <source src="./multimedia/audio/audio.mp3" type="audio/mpeg">
                         Your browser does not support the audio tag
                         <caption>This is our first additional audio</caption>
                     </audio>
-                    <p><a href="#">This is my best audio ever</a></p>
+                    <!-- <p><a href="#">This is my best audio ever</a></p> -->
                 </div>
                 <div class="grid gap-0 row-gap-6">
                     <audio controls>
@@ -130,6 +140,18 @@
                         Your browser does not support the audio tag
                         <caption>This is our third additional audio</caption>
                     </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <!-- Newly Uploaded Audio Container -->
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-8">
+                <div id="uploadedAudioContainer">
+                    <!-- Newly uploaded audio will be appended here -->
                 </div>
             </div>
         </div>
@@ -183,6 +205,18 @@
                 }, 2000);
             });
         });
+    </script>
+        <script>
+        function uploadAudio(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const audioURL = URL.createObjectURL(file);
+                const audioElement = document.createElement('audio');
+                audioElement.controls = true;
+                audioElement.src = audioURL;
+                document.getElementById('uploadedAudioContainer').appendChild(audioElement);
+            }
+        }
     </script>
 </body>
 
