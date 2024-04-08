@@ -1,3 +1,5 @@
+<!-- kwizera thierry -->
+<!-- 222003408 -->
 <?php
 session_start(); // Start the session
 
@@ -83,11 +85,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         .form {
-            max-width: 800px; /* Adjust the maximum width */
+            max-width: 600px; /* Adjust the maximum width */
             padding: 20px;
             border: 2px solid #007bff;
             border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8);
         }
 
         .form-title {
@@ -156,7 +158,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                             Forms
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="friends.html">Friend Form</a></li>
+                                            <li><a class="dropdown-item" href="friends.php">Friend Form</a></li>
                                             <li><a class="dropdown-item" href="profile.php">Profile Form</a></li>
                                         </ul>
                                     </li>
@@ -231,33 +233,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 ?>
                         <div class="form-group">
                             <label for="campus" class="form-label">Campus</label>
-                            <input type="text" class="form-control" id="campus" name="campus" value="<?php echo $row['Campus']; ?>">
+                            <input type="text" class="form-control" id="campus" name="campus" value="<?php echo $row['Campus']; ?>" readonly>
                         </div>
                         <div class="form-group">
                             <label for="college" class="form-label">College</label>
-                            <input type="text" class="form-control" id="college" name="college" value="<?php echo $row['College']; ?>">
+                            <input type="text" class="form-control" id="college" name="college" value="<?php echo $row['College']; ?>" readonly>
                         </div>
                         <div class="form-group">
                             <label for="school" class="form-label">School</label>
-                            <input type="text" class="form-control" id="school" name="school" value="<?php echo $row['School']; ?>">
+                            <input type="text" class="form-control" id="school" name="school" value="<?php echo $row['School']; ?>" readonly>
                         </div>
                         <div class="form-group">
                             <label for="department" class="form-label">Department</label>
-                            <input type="text" class="form-control" id="department" name="department" value="<?php echo $row['Department']; ?>">
+                            <input type="text" class="form-control" id="department" name="department" value="<?php echo $row['Department']; ?>" readonly>
                         </div>
                         <div class="form-group">
                             <label for="level" class="form-label">Level</label>
-                            <input type="text" class="form-control" id="level" name="level" value="<?php echo $row['Level']; ?>">
+                            <input type="text" class="form-control" id="level" name="level" value="<?php echo $row['Level']; ?>" readonly>
                         </div>
                         <div class="form-group">
                             <label for="group" class="form-label">Group</label>
-                            <input type="text" class="form-control" id="group" name="group" value="<?php echo $row['Group']; ?>">
+                            <input type="text" class="form-control" id="group" name="group" value="<?php echo $row['Group']; ?>" readonly>
                         </div>
                         <div class="form-group">
                             <label for="regnumber" class="form-label">Registration Number</label>
-                            <input type="text" class="form-control" id="regnumber" name="regnumber" value="<?php echo $row['Regnumber']; ?>">
+                            <input type="text" class="form-control" id="regnumber" name="regnumber" value="<?php echo $row['Regnumber']; ?>" readonly>
                         </div>
-                        <button type="submit" class="btn btn-primary">Save</button>
                 <?php
                     }
                 } else {
