@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 29, 2024 at 01:10 PM
+-- Generation Time: Apr 11, 2024 at 06:06 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -85,6 +85,14 @@ CREATE TABLE `multimedia` (
   `upload_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `multimedia`
+--
+
+INSERT INTO `multimedia` (`mid`, `userid`, `type`, `location`, `upload_date`) VALUES
+(1, 1, 'image', 'multimedia/images/boris.jpg', '2024-04-08 20:47:15'),
+(2, 1, 'image', 'multimedia/images/boris.jpg', '2024-04-08 20:47:25');
+
 -- --------------------------------------------------------
 
 --
@@ -102,6 +110,13 @@ CREATE TABLE `profile` (
   `Group` varchar(50) DEFAULT NULL,
   `Regnumber` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `profile`
+--
+
+INSERT INTO `profile` (`pid`, `userid`, `Campus`, `College`, `School`, `Department`, `Level`, `Group`, `Regnumber`) VALUES
+(2, 1, 'HUYE', 'CBE', 'Business', 'BIT', 'L2', 'A', '222003408');
 
 -- --------------------------------------------------------
 
@@ -145,6 +160,22 @@ CREATE TABLE `user` (
   `activation_code` varchar(50) DEFAULT NULL,
   `is_activated` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `firstname`, `lastname`, `username`, `email`, `telephone`, `password`, `creationdate`, `activation_code`, `is_activated`) VALUES
+(1, 'thierry', 'kwizera', 'kwzrthierry', 'kwzrthieery@gmail.com', '0788906652', '123456', '2024-04-06 08:31:09', NULL, 0),
+(3, 'emery', 'intwari', 'emery', NULL, NULL, '1234', '2024-04-11 16:00:14', NULL, 0),
+(4, 'pascaline', 'ingabire', 'passy', NULL, NULL, '1234', '2024-04-11 16:00:14', NULL, 0),
+(7, 'deborah', 'irakoze', 'debbie', NULL, NULL, '1234', '2024-04-11 16:01:30', NULL, 0),
+(8, 'pio', 'kayihura', 'pio', NULL, NULL, '1234', '2024-04-11 16:01:30', NULL, 0),
+(9, 'christian', 'shema', 'chris', NULL, NULL, '1234', '2024-04-11 16:01:57', NULL, 0),
+(10, 'junior', 'rukundo', 'junior', NULL, NULL, '1234', '2024-04-11 16:03:39', NULL, 0),
+(11, 'eduard', 'nsengiyumva', 'edu', NULL, NULL, '1234', '2024-04-11 16:03:39', NULL, 0),
+(12, 'francois', 'niyitunga', 'fran', NULL, NULL, '1234', '2024-04-11 16:04:23', NULL, 0),
+(13, 'annet Mukabarisa', 'nyangoma', 'annet', NULL, NULL, '1234', '2024-04-11 16:04:23', NULL, 0);
 
 --
 -- Indexes for dumped tables
@@ -250,13 +281,13 @@ ALTER TABLE `like`
 -- AUTO_INCREMENT for table `multimedia`
 --
 ALTER TABLE `multimedia`
-  MODIFY `mid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `mid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `profile`
 --
 ALTER TABLE `profile`
-  MODIFY `pid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `pid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `role`
@@ -274,7 +305,7 @@ ALTER TABLE `unlike`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables

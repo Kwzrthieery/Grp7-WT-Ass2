@@ -104,47 +104,71 @@
                 <!-- Latest Article -->
                 <div class="card mb-3">
                     <div class="card-body">
-                        <h5 class="card-title">Latest Article Title</h5>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dapibus,
-                            tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-                        <p class="card-text">Author: John Doe</p>
-                        <p class="card-text">Published: January 1, 2024</p>
-                        <a href="#" class="btn btn-primary">Read More</a>
+                        <h5 class="card-title">Michael Jackson: The King of Pop</h5>
+                        <p class="card-text">Michael Jackson, often referred to as the King of Pop, was an iconic
+                            figure in the world of music and entertainment. Born on August 29, 1958, in Gary, Indiana,
+                            Jackson rose to fame as a member of the Jackson 5 alongside his brothers. However, it was
+                            his solo career that truly solidified his status as a global superstar.</p>
+                        <!-- Comment section -->
+                        <div class="comment-section">
+                            <h6>Comments:</h6>
+                            <div class="comments"></div>
+                            <form class="comment-form">
+                                <div class="mb-3">
+                                    <label for="comment" class="form-label">Your Comment:</label>
+                                    <textarea class="form-control" id="comment" name="comment" rows="3"
+                                        required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                        <!-- Like and Unlike buttons -->
+                        <div class="d-flex align-items-center mt-3">
+                            <!-- Like button -->
+                            <button class="btn btn-outline-primary me-2 like-btn">Like</button>
+                            <!-- Unlike button -->
+                            <button class="btn btn-outline-danger unlike-btn">Unlike</button>
+                        </div>
                     </div>
                 </div>
-                <!-- Remaining Articles -->
+
+                <!-- Add Article Button -->
+                <button type="button" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#addArticleModal">
+                    Add Article
+                </button>
+
+                <!-- President Paul Kagame Article -->
                 <div class="row">
-                    <!-- Article Cards -->
                     <div class="col-md-4">
                         <div class="card mb-3">
                             <div class="card-body">
-                                <h5 class="card-title">Article Title 2</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                <p class="card-text">Author: Jane Smith</p>
+                                <h5 class="card-title">President Paul Kagame</h5>
+                                <p class="card-text">President Paul Kagame, the current leader of Rwanda, is a figure
+                                    known for his transformative leadership and dedication to progress. Born on October
+                                    23, 1957, in Gitarama, Rwanda, Kagame has played a pivotal role in shaping the
+                                    country's trajectory since assuming office in 2000.</p>
+                                <p class="card-text">Author: Pio KAYIHURA</p>
                                 <p class="card-text">Published: December 15, 2023</p>
-                                <a href="#" class="btn btn-primary">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card mb-3">
-                            <div class="card-body">
-                                <h5 class="card-title">Article Title 3</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                <p class="card-text">Author: Alex Johnson</p>
-                                <p class="card-text">Published: November 20, 2023</p>
-                                <a href="#" class="btn btn-primary">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card mb-3">
-                            <div class="card-body">
-                                <h5 class="card-title">Article Title 4</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                <p class="card-text">Author: Emily Brown</p>
-                                <p class="card-text">Published: October 5, 2023</p>
-                                <a href="#" class="btn btn-primary">Read More</a>
+                                <!-- Comment section -->
+                                <div class="comment-section">
+                                    <h6>Comments:</h6>
+                                    <div class="comments"></div>
+                                    <form class="comment-form">
+                                        <div class="mb-3">
+                                            <label for="comment" class="form-label">Your Comment:</label>
+                                            <textarea class="form-control" id="comment" name="comment" rows="3"
+                                                required></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </form>
+                                </div>
+                                <!-- Like and Unlike buttons -->
+                                <div class="d-flex align-items-center mt-3">
+                                    <!-- Like button -->
+                                    <button class="btn btn-outline-primary me-2 like-btn">Like</button>
+                                    <!-- Unlike button -->
+                                    <button class="btn btn-outline-danger unlike-btn">Unlike</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -153,6 +177,32 @@
         </div>
     </div>
 
+    <!-- Add Article Modal -->
+    <div class="modal fade" id="addArticleModal" tabindex="-1" aria-labelledby="addArticleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addArticleModalLabel">Add New Article</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="articles.php" method="post">
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="title" name="title" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="contents" class="form-label">Contents</label>
+                            <textarea class="form-control" id="contents" name="contents" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logout Modal -->
     <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -186,8 +236,34 @@
         </div>
     </div>
 
+    <!-- jQuery and Bootstrap Bundle with Popper -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Like button click event
+            $('.like-btn').click(function() {
+                alert('Liked!');
+            });
+
+            // Unlike button click event
+            $('.unlike-btn').click(function() {
+                alert('Unliked!');
+            });
+
+            // Comment form submission
+            $('.comment-form').submit(function(e) {
+                e.preventDefault();
+                var comment = $(this).find('textarea[name="comment"]').val();
+                $(this).siblings('.comments').append('<div class="comment">' + comment + '</div>');
+                $(this).find('textarea[name="comment"]').val('');
+            });
+        });
+    </script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('logoutBtn').addEventListener('click', function() {
